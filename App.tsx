@@ -1,34 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, useColorScheme, View } from 'react-native';
-import { colors } from './src/constants';
-import { Intro } from './src/screens';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const theme = useColorScheme();
-
-  console.log('theme', theme);
-
-  const isTest = false;
-
-  if (isTest) {
-    return (
-      <ImageBackground
-        source={require('./assets/background.png')}
-        style={{
-          ...styles.container,
-          backgroundColor: theme === 'dark' ? colors.black : colors.white,
-        }}
-      >
-        <Intro />
-
-        <StatusBar style="auto" />
-      </ImageBackground>
-    )
-  }
 
   return (
     <View style={styles.container}>
-      <Intro />
+      <Text>Open up App.tsx to start working on your app!</Text>
 
       <StatusBar style="auto" />
     </View>
