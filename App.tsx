@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { Platform } from 'react-native';
 import { AuthProvider, useAuth } from 'src/context/auth';
-import { Home, Onbording, SignIn, SignUp } from 'src/screens';
+import { Home, Onbording, Settings, SignIn, SignUp } from 'src/screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,36 +17,59 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator
       initialRouteName={loggedUser ? "Home" : "Onbording"}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        contentStyle: {
+          backgroundColor: "#fff",
+        }
+      }}
     >
       {
         loggedUser ? (
-          <Stack.Screen name="Home" component={Home} />
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                presentation: Platform.OS === 'ios' ? 'formSheet' : 'modal',
+                sheetCornerRadius: 30,
+              }}
+            />
+          </>
         ) : (
           <>
-            <Stack.Screen name="Onbording" component={Onbording} />
+            <Stack.Screen
+              name="Onbording"
+              component={Onbording}
+            />
             <Stack.Screen
               name="Sign In"
               component={SignIn} 
               options={{
-                presentation: 'formSheet',
+                presentation: Platform.OS === 'ios' ? 'formSheet' : 'modal',
                 gestureDirection: "vertical",
                 animation: "slide_from_bottom",
                 sheetGrabberVisible: true,
                 sheetInitialDetentIndex: 0,
-                sheetAllowedDetents: [0.5, 1.0]
+                sheetAllowedDetents: [0.5, 0.5],
+                sheetCornerRadius: 30,
               }}
             />
             <Stack.Screen
               name="Sign Up"
               component={SignUp} 
               options={{
-                presentation: 'formSheet',
+                presentation: Platform.OS === 'ios' ? 'formSheet' : 'modal',
                 gestureDirection: "vertical",
                 animation: "slide_from_bottom",
                 sheetGrabberVisible: true,
                 sheetInitialDetentIndex: 0,
-                sheetAllowedDetents: [0.5, 1.0]
+                sheetAllowedDetents: [0.5, 0.5],
+                sheetCornerRadius: 30,
               }}
             />
           </>

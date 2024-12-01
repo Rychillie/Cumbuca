@@ -20,7 +20,8 @@
     "react-native": "0.76.3",
     "react-native-gesture-handler": "^2.21.2",
     "react-native-reanimated": "^3.16.3",
-    "react-native-svg": "15.8.0"
+    "react-native-svg": "15.8.0",
+    "expo-system-ui": "~4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

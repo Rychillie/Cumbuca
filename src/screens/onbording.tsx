@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'src/components';
 import { useNavigation } from 'src/lib';
 
-const Onbording = () => {
+export default function Onbording() {
   const navigation = useNavigation();
 
   return (
@@ -28,6 +28,7 @@ const Onbording = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -39,5 +40,3 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-export default Onbording;

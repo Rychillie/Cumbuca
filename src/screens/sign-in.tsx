@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'src/components';
 import { useAuth } from 'src/context/auth';
 
-const SignIn = () => {
+export default function SignIn() {
   const { signIn, signInError, isLoading, clearErrors } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('rychillie@hotmail.com');
+  const [password, setPassword] = useState('12qwaszx@@');
 
   const handleLogin = async () => {
     clearErrors();
@@ -21,22 +21,27 @@ const SignIn = () => {
 
   return (
     <View style={styles.container}>
-      <Input
-        placeholder="Email"
-        keyboardType='email-address'
-        onChangeText={setEmail}
-        value={email}
-      />
-      <Input
-        placeholder="Password"
-        secureTextEntry={true}
-        onChangeText={setPassword}
-        value={password}
-      />
-      {signInError ? <Text style={styles.error}>{signInError}</Text> : null}
-      <Button variant='primary' onPress={handleLogin} disabled={isLoading}>
-        {isLoading ? 'Loading...' : 'Sign In'}
-      </Button>
+      <Text style={{ fontSize: 32, fontWeight: 'bold' }}>Sign In</Text>
+      <View style={{ gap: 20 }}>
+        <View style={{ gap: 15 }}>
+          <Input
+            placeholder="Email"
+            keyboardType='email-address'
+            onChangeText={setEmail}
+            value={email}
+          />
+          <Input
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={setPassword}
+            value={password}
+          />
+        </View>
+        {signInError ? <Text style={styles.error}>{signInError}</Text> : null}
+        <Button variant='primary' onPress={handleLogin} disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Sign In'}
+        </Button>
+      </View>
     </View>
   );
 };
@@ -44,13 +49,13 @@ const SignIn = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    padding: 20,
-    gap: 15,
+    paddingVertical: 60,
+    paddingHorizontal: 20,
+    gap: 30,
   },
   error: {
     color: 'red',
   },
 });
-
-export default SignIn;

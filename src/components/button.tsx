@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react
 
 type Props = {
   children: ReactNode;
-  variant: 'primary' | 'secondary';
+  variant: 'primary' | 'secondary' | 'danger';
 };
 
 export default function Button({
@@ -17,16 +17,21 @@ export default function Button({
         styles.button,
         variant === 'primary'
           ? styles.buttonPrimary
-          : styles.buttonSecondary
+          : variant === 'secondary'
+          ? styles.buttonSecondary
+          : styles.buttonDanger
       ]}
       {...props}
     >
       <Text
-        style={
+        style={[
+          styles.text,
           variant === 'primary'
             ? styles.textPrimary
-            : styles.textSecondary
-        }
+            : variant === 'secondary'
+            ? styles.textSecondary
+            : styles.textDanger
+        ]}
       >
         {children}
       </Text>
@@ -36,6 +41,7 @@ export default function Button({
 
 const styles = StyleSheet.create({
   button: {
+    minHeight: 40,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 10,
@@ -49,10 +55,21 @@ const styles = StyleSheet.create({
   buttonSecondary: {
     backgroundColor: '#fff',
   },
+  buttonDanger: {
+    backgroundColor: 'red',
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: 'bold',
+  },
   textPrimary: {
     color: '#fff',
   },
   textSecondary: {
     color: '#000',
+  },
+  textDanger: {
+    color: '#fff',
   },
 });
