@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { validate } from 'src/lib';
 import { getUser, userSignIn, userSignOut, userSignUp } from 'src/services/storage';
 
 interface AuthContextType {
@@ -36,6 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signIn = async (email: string, password: string) => {
     setIsLoading(true);
     setSignInError('');
+    
     const user = await userSignIn(email, password);
     if (user && 'error' in user) {
       setSignInError(user.error);
@@ -61,6 +63,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, cpf: string) => {
     setIsLoading(true);
     setSignUpError('');
+
+    if (!validate.cpf(cpf)) {
+      setSignUpError('CPF inválido.');
+      setIsLoading(false);
+      return;
+    }
+
     const user = await userSignUp(email, password, cpf);
     if (user && 'error' in user) {
       setSignUpError(user.error);
